@@ -10,10 +10,10 @@ CC			=	gcc
 CCFLAGS		=	-Wall -Wextra -Werror
 
 # Executable name
-NAME		=	executable
+NAME		=	mns
 
 # Files
-SRC_FILES	=	00_main
+SRC_FILES	=	00_main 01_verification
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
