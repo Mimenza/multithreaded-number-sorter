@@ -1,29 +1,28 @@
 #include "../incs/mns.h"
 
-int handle_line(char *line, int *numbers_per_thread, int *thread_num)
+int handle_line(char *line, t_data *data)
 {
-    if (sscanf(line, "numbers_per_thread = %d", numbers_per_thread) == 1)
+    if (sscanf(line, "numbers_per_thread = %d", &(*data).numbers_per_thread) == 1)
     {
-        if (*numbers_per_thread <= 0)
+        if ((*data).numbers_per_thread <= 0)
         {
-            fprintf(stderr, "Error: Invalid value for numbers_per_thread: %d\n", *numbers_per_thread);
+            fprintf(stderr, "Error: Invalid value for numbers_per_thread: %d\n", (*data).numbers_per_thread);
             exit(1);
         }
     }
 
-    if (sscanf(line, "thread_num = %d", thread_num) == 1)
+    if (sscanf(line, "thread_num = %d", &(*data).thread_num) == 1)
     {
-        if (*thread_num <= 0)
+        if ((*data).thread_num <= 0)
         {
-            fprintf(stderr, "Error: Invalid value for thread_num: %d\n", *thread_num);
+            fprintf(stderr, "Error: Invalid value for thread_num: %d\n", (*data).thread_num);
             exit(1);
         }
     }
-
     return 0;
 }
 
-void read_file(FILE *file, int *numbers_per_thread, int *thread_num)
+void read_file(FILE *file, t_data *data)
 {
     char line[256];
     int non_empty_lines = 0;
@@ -52,11 +51,11 @@ void read_file(FILE *file, int *numbers_per_thread, int *thread_num)
                 fprintf(stderr, "Error: More than 2 non-empty lines found.\n");
                 exit(1);
             }
-            handle_line(line, numbers_per_thread, thread_num);
+            handle_line(line, data);
         }
     }
 
-    if (*numbers_per_thread == -1 || *thread_num == -1)
+    if ((*data).numbers_per_thread == -1 || (*data).thread_num == -1)
     {
         fprintf(stderr, "Error: Missing required parameters in the configuration file.\n");
         exit(1);
@@ -68,6 +67,4 @@ void read_file(FILE *file, int *numbers_per_thread, int *thread_num)
         exit(1);
     }
 
-    // printf("Found thread_num: %d\n", *thread_num);
-    // printf("Found numbers_per_thread: %d\n", *numbers_per_thread);
 }

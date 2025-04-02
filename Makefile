@@ -13,7 +13,7 @@ CCFLAGS		=	-Wall -Wextra -Werror
 NAME		=	mns
 
 # Files
-SRC_FILES	=	00_main 01_verification 02_handleFile
+SRC_FILES	=	00_main 01_verification 02_handleFile 03_thread 04_utils 05_list
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 

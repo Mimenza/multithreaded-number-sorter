@@ -25,10 +25,9 @@ int handle_args(int argc, char **argv)
     }
 }
 
-int handle_file(const char *file_path, int *numbers_per_thread, int *thread_num)
+int handle_file(const char *file_path, t_data *data)
 {
     FILE *file = fopen(file_path, "r");
-
 
     if (!file)
     {
@@ -36,27 +35,37 @@ int handle_file(const char *file_path, int *numbers_per_thread, int *thread_num)
         return 1;
     }
 
-    read_file(file, numbers_per_thread, thread_num);
+    read_file(file, data);
     fclose(file);
+    return 0;
+}
+
+int init_data(t_data *data)
+{
+    data->numbers_per_thread = -1;
+    data->thread_num = -1;
     return 0;
 }
 
 int main(int argc, char **argv)
 {
-    int numbers_per_thread = -1;
-    int thread_num = -1;
+    t_data data;
 
+    if (init_data(&data) == 1)
+        return 1;
 
     if (handle_args(argc, argv) == 1)
         return 1;
 
-    if (handle_file(argv[2], &numbers_per_thread, &thread_num) == 1)
+    if (handle_file(argv[2], &data) == 1)
         return 1;
-    
+
     printf(""
            "Configuration:\n"
            "  numbers_per_thread = %d\n"
            "  thread_num = %d\n",
-           numbers_per_thread, thread_num);
+           data.numbers_per_thread, data.thread_num);
+
+   init_program(data);
     return 0;
 }
