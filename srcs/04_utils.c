@@ -1,5 +1,6 @@
 #include "../incs/mns.h"
 
+// Checks if a number is unique in the given array.
 bool is_unique(int *array, int size, int number)
 {
     int i = 0;
@@ -14,6 +15,7 @@ bool is_unique(int *array, int size, int number)
     return true;
 }
 
+// Generates an array of unique random numbers.
 void generate_unique_numbers(int *unique_numbers, int total_numbers)
 {
     srand(time(NULL));
@@ -30,6 +32,7 @@ void generate_unique_numbers(int *unique_numbers, int total_numbers)
     }
 }
 
+// Allocates memory for threads and unique numbers arrays.
 bool allocate_memory(pthread_t **threads, int **unique_numbers, int thread_num, int total_numbers)
 {
     *threads = malloc(thread_num * sizeof(pthread_t));
@@ -50,6 +53,7 @@ bool allocate_memory(pthread_t **threads, int **unique_numbers, int thread_num, 
     return true;
 }
 
+// Assigns numbers to a thread based on its offset.
 int *assign_numbers_to_thread(int *unique_numbers, t_data data, int offset)
 {
 
@@ -70,6 +74,7 @@ int *assign_numbers_to_thread(int *unique_numbers, t_data data, int offset)
     return thread_numbers;
 }
 
+// Frees all nodes in a linked list.
 void free_list(t_node *head)
 {
     t_node *current = head;
@@ -82,6 +87,8 @@ void free_list(t_node *head)
         current = next;
     }
 }
+
+// Prints all elements in a linked list.
 void print_list(t_node *head)
 {
     t_node *current = head;
@@ -95,6 +102,7 @@ void print_list(t_node *head)
     printf("\n");
 }
 
+// Prints the configuration details of the program.
 void print_config(t_data data)
 {
     printf(""
@@ -104,6 +112,7 @@ void print_config(t_data data)
            data.numbers_per_thread, data.thread_num);
 }
 
+// Prints the results of the odd and even lists.
 void print_result(t_list *odd, t_list *even)
 {
     printf("\nOdd list:\n");
@@ -112,6 +121,7 @@ void print_result(t_list *odd, t_list *even)
     print_list(even->head);
 }
 
+// Frees all allocated resources used in the program.
 void free_all(t_list *odd, t_list *even, pthread_t *threads, int *unique_numbers)
 {
     free_list(odd->head);

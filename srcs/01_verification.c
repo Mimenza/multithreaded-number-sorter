@@ -1,6 +1,6 @@
 #include "../incs/mns.h"
 
-
+// Prints the help message for the program.
 void print_help()
 {
     printf("Usage:\n");
@@ -8,12 +8,14 @@ void print_help()
     printf("  -f, --file PATH  Specify the configuration file (must be .txt)\n");
 }
 
+// Checks if a file exists at the given path.
 int file_exists(const char *path)
 {
     struct stat buffer;
     return (stat(path, &buffer) == 0);
 }
 
+// Validates the configuration file's existence and extension.
 int validate_file(const char *file_path)
 {
     const char *extension = strrchr(file_path, '.');
@@ -31,6 +33,7 @@ int validate_file(const char *file_path)
     return 1;
 }
 
+// Handles the file option by validating the provided file path.
 void handle_file_option(int argc, char *argv[])
 {
     if (argc < 3)
@@ -44,6 +47,7 @@ void handle_file_option(int argc, char *argv[])
         exit(1);
 }
 
+// Handles invalid command-line options.
 void handle_invalid_option(const char *option)
 {
     fprintf(stderr, "Error: Invalid parameter '%s'.\n", option);

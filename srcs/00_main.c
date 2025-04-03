@@ -1,5 +1,6 @@
 #include "../incs/mns.h"
 
+// Handles command-line arguments and options.
 int handle_args(int argc, char **argv)
 {
     if (argc < 2)
@@ -25,6 +26,7 @@ int handle_args(int argc, char **argv)
     }
 }
 
+// Opens the specified file and reads its content into the data structure.
 int handle_file(const char *file_path, t_data *data)
 {
     FILE *file = fopen(file_path, "r");
@@ -40,6 +42,7 @@ int handle_file(const char *file_path, t_data *data)
     return 0;
 }
 
+// Initializes the data structure with default values.
 int init_data(t_data *data)
 {
     data->numbers_per_thread = -1;
@@ -47,6 +50,7 @@ int init_data(t_data *data)
     return 0;
 }
 
+// Entry point of the program.
 int main(int argc, char **argv)
 {
     t_data data;

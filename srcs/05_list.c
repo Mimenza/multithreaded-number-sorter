@@ -1,6 +1,6 @@
 #include "../incs/mns.h"
 
-
+// Creates a new node with the given value.
 t_node *create_node(int nbr)
 {
     t_node *new_node = malloc(sizeof(t_node));
@@ -14,6 +14,7 @@ t_node *create_node(int nbr)
     return new_node;
 }
 
+// Appends a node to the list in sorted order.
 void append_node(t_list *list, int nbr)
 {
     t_node *new_node = create_node(nbr);

@@ -1,5 +1,6 @@
 #include "../incs/mns.h"
 
+// Parses a line from the configuration file and updates the data structure.
 int handle_line(char *line, t_data *data)
 {
     if (sscanf(line, "numbers_per_thread = %d", &(*data).numbers_per_thread) == 1)
@@ -22,6 +23,7 @@ int handle_line(char *line, t_data *data)
     return 0;
 }
 
+// Reads the configuration file and validates its content.
 void read_file(FILE *file, t_data *data)
 {
     char line[256];

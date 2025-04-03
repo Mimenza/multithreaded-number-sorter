@@ -1,5 +1,6 @@
 #include "../incs/mns.h"
 
+// Thread routine to process numbers and append them to the appropriate list.
 void *thread_routine(void *arg)
 {
     t_thread_data *data = (t_thread_data *)arg;
@@ -25,6 +26,7 @@ void *thread_routine(void *arg)
     free(data);
 }
 
+// Creates and initializes thread-specific data.
 void create_thread_data(t_thread_data **thread_data, int *unique_numbers, int thread_id, t_data data, t_list *odd, t_list *even)
 {
     *thread_data = malloc(sizeof(t_thread_data));
@@ -40,6 +42,7 @@ void create_thread_data(t_thread_data **thread_data, int *unique_numbers, int th
     (*thread_data)->thread_id = thread_id;
 }
 
+// Creates and initializes a new list struct with a mutex.
 t_list *create_and_init_list()
 {
     t_list *list = malloc(sizeof(t_list));
@@ -53,6 +56,7 @@ t_list *create_and_init_list()
     return list;
 }
 
+// Creates threads.
 void create_threads(pthread_t *threads, int *unique_numbers, t_data data, t_list *odd, t_list *even)
 {
     int i = 0;
@@ -65,6 +69,7 @@ void create_threads(pthread_t *threads, int *unique_numbers, t_data data, t_list
     }
 }
 
+// Joins all threads.
 void join_threads(pthread_t *threads, int thread_num)
 {
     int i = 0;
@@ -75,6 +80,7 @@ void join_threads(pthread_t *threads, int thread_num)
     }
 }
 
+// Initializes the program, manages threads, and prints results.
 void init_program(t_data data)
 {
     pthread_t *threads;
