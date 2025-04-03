@@ -24,6 +24,15 @@ OBJ_DIR = objs/
 # RULES #
 all: $(NAME)
 
+help:
+	@echo "$(YELLOW)Usage:$(NC)"
+	@echo "  make            Build the program."
+	@echo "  make clean      Remove object files."
+	@echo "  make fclean     Remove object files and the executable."
+	@echo "  make re         Clean and rebuild the program."
+	@echo "  ./mns -h        Display help message."
+	@echo "  ./mns --file    Specify the configuration file."
+
 # Compile
 $(NAME):$(OBJ)
 		@$(CC) $(OBJ) -o $(NAME)
