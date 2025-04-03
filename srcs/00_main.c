@@ -43,11 +43,11 @@ int handle_file(const char *file_path, t_data *data)
 }
 
 // Initializes the data structure with default values.
-int init_data(t_data *data)
+void init_data(t_data *data)
 {
     data->numbers_per_thread = -1;
     data->thread_num = -1;
-    return 0;
+    signal(SIGINT, sigint_handler);
 }
 
 // Entry point of the program.

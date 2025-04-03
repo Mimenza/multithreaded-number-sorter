@@ -124,10 +124,46 @@ void print_result(t_list *odd, t_list *even)
 // Frees all allocated resources used in the program.
 void free_all(t_list *odd, t_list *even, pthread_t *threads, int *unique_numbers)
 {
-    free_list(odd->head);
-    free(odd);
-    free_list(even->head);
-    free(even);
-    free(threads);
-    free(unique_numbers);
+    if (odd)
+    {
+        free_list(odd->head);
+        free(odd);
+    }
+    if (even)
+    {
+        free_list(even->head);
+        free(even);
+    }
+    if (threads)
+        free(threads);
+    if (unique_numbers)
+        free(unique_numbers);
+}
+
+// It initializes or retrieves the static data structure for the free.
+t_free_data *static_data(t_list *odd, t_list *even, pthread_t *threads, int *unique_numbers, int mode)
+{
+    static t_free_data data;
+
+    if (mode == 0)
+    {
+        data.odd = odd;
+        data.even = even;
+        data.threads = threads;
+        data.unique_numbers = unique_numbers;
+        return NULL;
+    }
+    else if (mode == 1)
+        return &data;
+
+    return NULL;
+}
+
+// Signal handler for SIGINT (Ctrl+C).
+void sigint_handler(int sig)
+{
+    t_free_data *data = static_data(NULL, NULL, NULL, NULL, 1);
+    if (data)
+        free_all(data->odd, data->even, data->threads, data->unique_numbers);
+    exit(0);
 }

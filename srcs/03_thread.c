@@ -84,9 +84,9 @@ void join_threads(pthread_t *threads, int thread_num)
 void init_program(t_data data)
 {
     pthread_t *threads;
-
     int *unique_numbers;
     int total_numbers = data.thread_num * data.numbers_per_thread;
+
 
     t_list *odd = create_and_init_list();
     t_list *even = create_and_init_list();
@@ -100,6 +100,8 @@ void init_program(t_data data)
 
     if (!allocate_memory(&threads, &unique_numbers, data.thread_num, total_numbers))
         return;
+
+    static_data(odd, even, threads, unique_numbers, 0);
 
     generate_unique_numbers(unique_numbers, total_numbers);
 
