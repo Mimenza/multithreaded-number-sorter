@@ -54,7 +54,7 @@ int *assign_numbers_to_thread(int *unique_numbers, t_data data, int offset)
 {
 
     int *thread_numbers = malloc((data.numbers_per_thread + 1) * sizeof(int));
-    
+
     if (!thread_numbers)
     {
         fprintf(stderr, "Error: Malloc for thread numbers failed.\n");
@@ -81,4 +81,43 @@ void free_list(t_node *head)
         free(current);
         current = next;
     }
+}
+void print_list(t_node *head)
+{
+    t_node *current = head;
+    int i = 0;
+    while (current != NULL)
+    {
+        printf("[%d] %d\n", i, current->value);
+        current = current->next;
+        i++;
+    }
+    printf("\n");
+}
+
+void print_config(t_data data)
+{
+    printf(""
+           "Configuration:\n"
+           "  numbers_per_thread = %d\n"
+           "  thread_num = %d\n",
+           data.numbers_per_thread, data.thread_num);
+}
+
+void print_result(t_list *odd, t_list *even)
+{
+    printf("\nOdd list:\n");
+    print_list(odd->head);
+    printf("Even list:\n");
+    print_list(even->head);
+}
+
+void free_all(t_list *odd, t_list *even, pthread_t *threads, int *unique_numbers)
+{
+    free_list(odd->head);
+    free(odd);
+    free_list(even->head);
+    free(even);
+    free(threads);
+    free(unique_numbers);
 }

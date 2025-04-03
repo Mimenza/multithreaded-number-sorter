@@ -51,20 +51,13 @@ int main(int argc, char **argv)
 {
     t_data data;
 
-    if (init_data(&data) == 1)
-        return 1;
+    init_data(&data);
 
     if (handle_args(argc, argv) == 1)
         return 1;
 
     if (handle_file(argv[2], &data) == 1)
         return 1;
-
-    printf(""
-           "Configuration:\n"
-           "  numbers_per_thread = %d\n"
-           "  thread_num = %d\n",
-           data.numbers_per_thread, data.thread_num);
 
    init_program(data);
     return 0;

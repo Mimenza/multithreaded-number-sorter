@@ -14,5 +14,8 @@ void generate_unique_numbers(int *unique_numbers, int total_numbers);
 bool allocate_memory(pthread_t **threads, int **unique_numbers, int thread_num, int total_numbers);
 int *assign_numbers_to_thread(int *unique_numbers, t_data data, int offset);
 void free_list(t_node *head);
-
+void free_all(t_list *odd, t_list *even, pthread_t *threads, int *unique_numbers);
+void print_list(t_node *head);
+void print_config(t_data data);
+void print_result(t_list *odd, t_list *even);
 #endif

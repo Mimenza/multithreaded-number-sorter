@@ -22,6 +22,5 @@ void *thread_routine(void *arg);
 void create_thread_data(t_thread_data **thread_data, int *unique_numbers, int thread_id, t_data data, t_list *odd, t_list *even);
 void create_threads(pthread_t *threads, int *unique_numbers, t_data data, t_list *odd, t_list *even);
 void join_threads(pthread_t *threads, int thread_num);
-void print_list(t_node *head);
 
 #endif

@@ -75,29 +75,16 @@ void join_threads(pthread_t *threads, int thread_num)
     }
 }
 
-void print_list(t_node *head)
-{
-    t_node *current = head;
-    int i = 0;
-    while (current != NULL)
-    {
-        printf("[%d] %d\n",i,  current->value);
-        current = current->next;
-        i++;
-    }
-    printf("\n");
-}
-
-
-
 void init_program(t_data data)
 {
     pthread_t *threads;
 
     int *unique_numbers;
     int total_numbers = data.thread_num * data.numbers_per_thread;
+
     t_list *odd = create_and_init_list();
     t_list *even = create_and_init_list();
+
     if (!odd || !even)
     {
         free(odd);
@@ -113,15 +100,8 @@ void init_program(t_data data)
     create_threads(threads, unique_numbers, data, odd, even);
     join_threads(threads, data.thread_num);
 
+    print_config(data);
+    print_result(odd, even);
 
-    free(unique_numbers);
-    free(threads);
-
-    printf("\nOdd list:\n");
-    print_list(odd->head);
-    printf("Even list:\n");
-    print_list(even->head);
-
-    free(odd);
-    free(even);
+    free_all(odd, even, threads, unique_numbers);
 }
